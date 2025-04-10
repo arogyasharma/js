@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multiplication Table Generator</title>
+</head>
+<body>
+
+<h2>Multiplication Table Generator</h2>
+
+<form onsubmit="generateTable(event)">
+  <fieldset>
+    <legend>Enter a Number</legend>
+    <input type="number" id="numberInput" required>
+    <button type="submit">Generate Table</button>
+  </fieldset>
+</form>
+
+<br>
+
+<table border="1" id="outputTable"></table>
+
+<script>
+function generateTable(event) {
+  event.preventDefault();
+  const num = parseInt(document.getElementById('numberInput').value);
+  const table = document.getElementById('outputTable');
+  table.innerHTML = "";
+
+  for (let i = 1; i <= 10; i++) {
+    const row = table.insertRow();
+    const cell1 = row.insertCell();
+    const cell2 = row.insertCell();
+    const cell3 = row.insertCell();
+
+    cell1.innerText = `${num}`;
+    cell2.innerText = "× " + i;
+    cell3.innerText = "= " + (num * i);
+  }
+}
+</script>
+
+</body>
+</html>

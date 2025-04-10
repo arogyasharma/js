@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Country-State Dropdown</title>
+</head>
+<body>
+
+<h3>Select Country and State:</h3>
+
+<select id="country" onchange="loadStates()">
+  <option value="">Select Country</option>
+  <option value="USA">USA</option>
+  <option value="India">India</option>
+  <option value="UK">UK</option>
+</select>
+
+<select id="state">
+  <option value="">Select State</option>
+</select>
+
+<script>
+const stateList = {
+  USA: ["California", "Texas", "New York"],
+  India: ["Delhi", "Tamil Nadu", "Maharashtra"],
+  UK: ["London", "Bristol", "Manchester"]
+};
+
+function loadStates() {
+  const country = document.getElementById("country").value;
+  const state = document.getElementById("state");
+  state.innerHTML = "<option>Select State</option>";
+
+  if (stateList[country]) {
+    stateList[country].forEach(s => {
+      state.innerHTML += `<option>${s}</option>`;
+    });
+  }
+}
+</script>
+
+</body>
+</html>

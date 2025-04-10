@@ -1,0 +1,478 @@
+Lab Assignment 1: Responsive Layout
+Techniques Used:
+
+Flexbox / CSS Grid for layout
+
+Media Queries for responsiveness
+
+Key Properties:
+
+css
+Copy
+Edit
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header & Footer */
+header, footer {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* Flexbox Layout */
+.main-content {
+  display: flex;
+  flex-wrap: wrap; /* Allow columns to wrap on smaller screens */
+  gap: 10px;
+  padding: 10px;
+}
+.left-column, .right-column {
+  flex: 1;
+  padding: 15px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+}
+
+/* Responsive Media Query */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column; /* Stack columns vertically */
+  }
+}
+Lab Assignment 2: Hover Effects
+Techniques Used:
+
+:hover pseudo-class
+
+Transition and Transform for animation effects
+
+Key Properties:
+
+css
+Copy
+Edit
+.card {
+  background-color: #fff;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+.card:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+Lab Assignment 3: Image Gallery
+Techniques Used:
+
+CSS Grid for layout
+
+Hover effects with transform and opacity
+
+Pseudo-elements for captions (if needed)
+
+Key Properties:
+
+css
+Copy
+Edit
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.gallery img {
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+.gallery img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+Lab Assignment 4: Styled Navigation Menu
+Techniques Used:
+
+Horizontal Menu using inline-block or flex
+
+Dropdown menus on hover using position and visibility
+
+Key Properties:
+
+css
+Copy
+Edit
+.nav {
+  background-color: #333;
+  overflow: hidden;
+}
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.nav li {
+  position: relative;
+}
+.nav li a {
+  display: block;
+  padding: 14px 20px;
+  color: white;
+  text-decoration: none;
+}
+.nav li:hover > ul {
+  display: block;
+}
+.nav li ul {
+  display: none;
+  position: absolute;
+  background-color: #444;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.nav li ul li a {
+  padding: 10px;
+}
+Lab Assignment 5: Custom Buttons
+Techniques Used:
+
+Gradients, Borders, Box Shadows
+
+Key Properties:
+
+css
+Copy
+Edit
+/* Gradient Background */
+.button-gradient {
+  background: linear-gradient(45deg, #ff6b6b, #f06595);
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Border Change on Hover */
+.button-border {
+  background: transparent;
+  border: 2px solid #4CAF50;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.button-border:hover {
+  border-color: #2e7d32;
+}
+
+/* Glowing Effect */
+.button-glow {
+  background: #2196F3;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  box-shadow: 0 0 10px #2196F3;
+  cursor: pointer;
+}
+.button-glow:hover {
+  box-shadow: 0 0 20px #2196F3;
+}
+Lab Assignment 6: CSS Animations
+Techniques Used:
+
+@keyframes for animations
+
+Transitions for smooth effects
+
+Key Properties:
+
+css
+Copy
+Edit
+@keyframes headerAnimation {
+  0% { color: #333; transform: translateY(0); }
+  50% { color: #4CAF50; transform: translateY(-10px); }
+  100% { color: #333; transform: translateY(0); }
+}
+.header-animated {
+  animation: headerAnimation 3s infinite;
+  transition: all 0.3s ease;
+}
+Lab Assignment 7: Multi-Section Page
+Techniques Used:
+
+Sticky Navigation using position: sticky
+
+Internal links for navigation
+
+Active link styling using pseudo-classes
+
+Key Properties:
+
+css
+Copy
+Edit
+nav {
+  position: sticky;
+  top: 0;
+  background: #333;
+  padding: 10px;
+}
+nav a {
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+}
+nav a.active {
+  background: #4CAF50;
+  border-radius: 4px;
+}
+Lab Assignment 8: Form Styling
+Techniques Used:
+
+Form inputs styling
+
+Rounded corners, shadows
+
+Pseudo-classes for validation (:valid, :invalid)
+
+Key Properties:
+
+css
+Copy
+Edit
+form {
+  max-width: 300px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+input:valid {
+  border-color: green;
+}
+input:invalid {
+  border-color: red;
+}
+button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+Lab Assignment 9: Pricing Table
+Techniques Used:
+
+Flexbox for layout
+
+Hover effects on buttons
+
+Key Properties:
+
+css
+Copy
+Edit
+.pricing-table {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+.plan {
+  border: 1px solid #ccc;
+  padding: 15px;
+  flex: 1;
+  margin: 0 10px;
+  background-color: #f9f9f9;
+}
+.plan.popular {
+  background-color: #e0f7fa;
+}
+.plan button {
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+}
+.plan button:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+Lab Assignment 10: Animated Loading Screen
+Techniques Used:
+
+CSS Animations for spinner or progress bar
+
+Keyframes
+
+Key Properties:
+
+css
+Copy
+Edit
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4CAF50;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+}
+Lab Assignment 11: Box Model Challenge
+Techniques Used:
+
+Fixed dimensions
+
+Percentage-based padding/margin
+
+Hover effects on borders
+
+Key Properties:
+
+css
+Copy
+Edit
+.box {
+  width: 300px;
+  height: 200px;
+  margin: 5%;
+  padding: 5%;
+  border: 2px solid #ccc;
+  transition: border 0.3s ease;
+}
+.box:hover {
+  border: 4px solid #4CAF50;
+}
+Lab Assignment 12: Dark/Light Theme Toggle
+Techniques Used:
+
+JavaScript toggling classes
+
+CSS class definitions for themes
+
+Key Properties:
+
+css
+Copy
+Edit
+body.light {
+  background-color: #fff;
+  color: #000;
+}
+body.dark {
+  background-color: #121212;
+  color: #fff;
+}
+Lab Assignment 13: CSS Transformations
+Techniques Used:
+
+3D transforms
+
+Hover to rotate
+
+Key Properties:
+
+css
+Copy
+Edit
+.card {
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+}
+.card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.back {
+  transform: rotateY(180deg);
+}
+Lab Assignment 14: Timeline Design
+Techniques Used:
+
+Pseudo-elements (::before, ::after)
+
+Vertical layout styling
+
+Key Properties:
+
+css
+Copy
+Edit
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #ccc;
+}
+.event {
+  margin: 20px 0;
+  position: relative;
+}
+.event::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: #4CAF50;
+  border-radius: 50%;
+}
+Lab Assignment 15: CSS Gradient Effects
+Techniques Used:
+
+Linear gradients
+
+Overlay gradients
+
+Key Properties:
+
+css
+Copy
+Edit
+.header {
+  background: linear-gradient(45deg, #ff6b6b, #f06595);
+  color: white;
+  padding: 20px;
+}
+.header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+}

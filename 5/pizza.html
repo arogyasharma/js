@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pizza Order Form</title>
+</head>
+<body>
+
+<h2>🍕 Pizza Order Form</h2>
+
+<form id="pizzaForm" onsubmit="submitOrder(event)">
+  <h3>Select Pizza Size:</h3>
+  <label><input type="radio" name="size" value="Small" required> Small</label><br>
+  <label><input type="radio" name="size" value="Medium"> Medium</label><br>
+  <label><input type="radio" name="size" value="Large"> Large</label><br>
+
+  <h3>Select Toppings:</h3>
+  <label><input type="checkbox" name="toppings" value="Cheese"> Cheese</label><br>
+  <label><input type="checkbox" name="toppings" value="Pepperoni"> Pepperoni</label><br>
+  <label><input type="checkbox" name="toppings" value="Mushrooms"> Mushrooms</label><br>
+  <label><input type="checkbox" name="toppings" value="Olives"> Olives</label><br><br>
+
+  <button type="submit">Place Order</button>
+</form>
+
+<h3 id="orderSummary"></h3>
+
+<script>
+function submitOrder(event) {
+  event.preventDefault();
+
+  // Get selected size
+  const size = document.querySelector('input[name="size"]:checked').value;
+
+  // Get selected toppings
+  const toppingElements = document.querySelectorAll('input[name="toppings"]:checked');
+  const toppings = Array.from(toppingElements).map(t => t.value);
+
+  // Show summary
+  const summary = `You ordered a ${size} pizza with ${toppings.length > 0 ? toppings.join(', ') : 'no toppings'}.`;
+  document.getElementById('orderSummary').innerText = summary;
+}
+</script>
+
+</body>
+</html>

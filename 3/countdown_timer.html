@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input type="number" id="seconds" placeholder="Enter seconds">
+<button onclick="startTimer()">Start</button>
+<h2 id="display"></h2>
+
+<script>
+let timer;
+
+function startTimer() {
+  clearInterval(timer);
+  let time = parseInt(document.getElementById("seconds").value);
+  timer = setInterval(() => {
+    document.getElementById("display").innerText = time + " seconds left";
+    if (time <= 0) {
+      clearInterval(timer);
+      document.getElementById("display").innerText = "Time's up!";
+    }
+    time--;
+  }, 1000);
+}
+</script>
+
+</body>
+</html>

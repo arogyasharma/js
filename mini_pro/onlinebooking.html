@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Appointment Booking</title>
+</head>
+<body style="font-family: Arial; text-align: center; padding: 20px;">
+
+<h2>Welcome to Our Service Portal</h2>
+<p>Select a service to book your appointment</p>
+
+<div>
+  <button onclick="openForm('Doctor')">Book Doctor</button>
+  <button onclick="openForm('Salon')">Book Salon</button>
+  <button onclick="openForm('Car')">Book Car Service</button>
+</div>
+
+<!-- Appointment Form (Hidden by default) -->
+<div id="formPopup" style="display:none; margin-top: 20px; border: 1px solid #ccc; padding: 15px;">
+  <h3>Book Appointment</h3>
+  <form id="appointmentForm">
+    <input id="name" placeholder="Full Name" required><br><span id="nameError" style="color:red"></span><br>
+    <input id="email" placeholder="Email"><br><span id="emailError" style="color:red"></span><br>
+    <input id="phone" placeholder="Phone Number"><br><span id="phoneError" style="color:red"></span><br>
+    <select id="service">
+      <option>Doctor</option><option>Salon</option><option>Car</option>
+    </select><br><br>
+    <input type="datetime-local" id="datetime"><br><span id="dateError" style="color:red"></span><br>
+    <textarea id="requests" placeholder="Special Requests (optional)"></textarea><br><br>
+    <label><input type="checkbox" id="terms"> I agree to the terms</label><br><span id="termsError" style="color:red"></span><br><br>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<!-- Display Appointments -->
+<h3>Booked Appointments</h3>
+<table border="1" id="appointmentsTable" style="margin:auto;">
+  <tr><th>Name</th><th>Service</th><th>Date & Time</th><th>Status</th></tr>
+</table>
+
+<script>
+function openForm(service) {
+  document.getElementById("formPopup").style.display = "block";
+  document.getElementById("service").value = service;
+}
+
+// Load appointments from localStorage
+window.onload = () => {
+  const data = JSON.parse(localStorage.getItem("appointments") || "[]");
+  data.forEach(showAppointment);
+};
+
+document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const service = document.getElementById("service").value;
+  const datetime = document.getElementById("datetime").value;
+  const terms = document.getElementById("terms").checked;
+
+  // Validation
+  let valid = true;
+  document.getElementById("nameError").textContent = name ? "" : "Name is required";
+  document.getElementById("emailError").textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "" : "Invalid email";
+  document.getElementById("phoneError").textContent = /^\d{10}$/.test(phone) ? "" : "Must be 10 digits";
+  document.getElementById("dateError").textContent = new Date(datetime) > new Date() ? "" : "Pick a future time";
+  document.getElementById("termsError").textContent = terms ? "" : "You must agree";
+
+  if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !/^\d{10}$/.test(phone) || new Date(datetime) <= new Date() || !terms) {
+    return;
+  }
+
+  const appointment = { name, service, datetime, status: "Pending" };
+  const data = JSON.parse(localStorage.getItem("appointments") || "[]");
+  data.push(appointment);
+  localStorage.setItem("appointments", JSON.stringify(data));
+  showAppointment(appointment);
+  this.reset();
+  alert("Appointment booked!");
+});
+
+function showAppointment(a) {
+  const row = document.createElement("tr");
+  row.innerHTML = `<td>${a.name}</td><td>${a.service}</td><td>${a.datetime}</td><td>${a.status}</td>`;
+  document.getElementById("appointmentsTable").appendChild(row);
+}
+</script>
+
+</body>
+</html>

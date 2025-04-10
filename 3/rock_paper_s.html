@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>Choose: Rock, Paper, or Scissors</h3>
+<button onclick="play('Rock')">Rock</button>
+<button onclick="play('Paper')">Paper</button>
+<button onclick="play('Scissors')">Scissors</button>
+
+<p id="result"></p>
+
+<script>
+function play(userChoice) {
+  const options = ['Rock', 'Paper', 'Scissors'];
+  const comp = options[Math.floor(Math.random() * 3)];
+  let result = '';
+
+  if (userChoice === comp) result = "It's a draw!";
+  else if (
+    (userChoice === 'Rock' && comp === 'Scissors') ||
+    (userChoice === 'Paper' && comp === 'Rock') ||
+    (userChoice === 'Scissors' && comp === 'Paper')
+  ) result = 'You win!';
+  else result = 'Computer wins!';
+
+  document.getElementById('result').innerText =
+    `You: ${userChoice} | Computer: ${comp} → ${result}`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="text">This is a sample paragraph.</p>
+<button onclick="adjustFont(1)">Increase Font Size</button>
+<button onclick="adjustFont(-1)">Decrease Font Size</button>
+
+<script>
+let size = 16;
+function adjustFont(change) {
+  size += change;
+  document.getElementById("text").style.fontSize = size + "px";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Textarea Counter</title>
+</head>
+<body>
+
+<h3>Type something:</h3>
+<textarea id="text" rows="5" cols="40" oninput="updateCount()"></textarea>
+<p>Characters: <span id="charCount">0</span></p>
+<p>Words: <span id="wordCount">0</span></p>
+
+<script>
+function updateCount() {
+  const text = document.getElementById("text").value;
+  const chars = text.length;
+  const words = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+
+  document.getElementById("charCount").innerText = chars;
+  document.getElementById("wordCount").innerText = words;
+
+  if (chars > 200) {
+    alert("Character limit of 200 exceeded!");
+  }
+}
+</script>
+
+</body>
+</html>
