@@ -1,0 +1,841 @@
+dynamic table
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table Generator</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Dynamic Table Generator</h2>
+    <label for="rows">Rows:</label>
+    <input type="number" id="rows" min="1" required>
+    <label for="columns">Columns:</label>
+    <input type="number" id="columns" min="1" required>
+    <button onclick="generateTable()">Generate Table</button>
+    <div id="tableContainer"></div>
+
+    <script>
+        function generateTable() {
+            const rows = document.getElementById('rows').value;
+            const columns = document.getElementById('columns').value;
+            const tableContainer = document.getElementById('tableContainer');
+            tableContainer.innerHTML = ''; 
+
+            const table = document.createElement('table');
+
+            for (let i = 0; i < rows; i++) {
+                const tr = document.createElement('tr');
+                for (let j = 0; j < columns; j++) {
+                    const td = document.createElement('td');
+                    td.textContent = `Row ${i + 1} Col ${j + 1}`;
+                    tr.appendChild(td);
+                }
+                const deleteRowBtn = document.createElement('button');
+                deleteRowBtn.textContent = 'Delete Row';
+                deleteRowBtn.onclick = () => tr.remove();
+                tr.appendChild(deleteRowBtn);
+                table.appendChild(tr);
+            }
+
+            const deleteColumnBtn = document.createElement('button');
+            deleteColumnBtn.textContent = 'Delete Last Column';
+            deleteColumnBtn.onclick = () => {
+                const rows = table.rows;
+                for (let i = 0; i < rows.length; i++) {
+                    if (rows[i].cells.length > 0) {
+                        rows[i].deleteCell(-2); 
+                    }
+                }
+            };
+            tableContainer.appendChild(table);
+            tableContainer.appendChild(deleteColumnBtn);
+        }
+    </script>
+</body>
+</html>
+
+--------
+
+Login 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign-Up Form with Validation</title>
+    <style>
+        .valid {
+            border: 2px solid green;
+        }
+        .invalid {
+            border: 2px solid red;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Sign-Up Form</h2>
+    <form id="signupForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <span id="nameError" class="error-message"></span>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <span id="emailError" class="error-message"></span>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <span id="passwordError" class="error-message"></span>
+        <br>
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <script>
+        document.getElementById('name').addEventListener('input', function () {
+            const name = this.value;
+            const nameError = document.getElementById('nameError');
+            if (name.trim() === '') {
+                nameError.textContent = 'Name must not be empty.';
+                this.classList.add('invalid');
+                this.classList.remove('valid');
+            } else {
+                nameError.textContent = '';
+                this.classList.add('valid');
+                this.classList.remove('invalid');
+            }
+        });
+
+        document.getElementById('email').addEventListener('input', function () {
+            const email = this.value;
+            const emailError = document.getElementById('emailError');
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                emailError.textContent = 'Email must be a valid format.';
+                this.classList.add('invalid');
+                this.classList.remove('valid');
+            } else {
+                emailError.textContent = '';
+                this.classList.add('valid');
+                this.classList.remove('invalid');
+            }
+        });
+
+        document.getElementById('password').addEventListener('input', function () {
+            const password = this.value;
+            const passwordError = document.getElementById('passwordError');
+            const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if (!passwordPattern.test(password)) {
+                passwordError.textContent = 'Password must be at least 8 characters with 1 uppercase & 1 number.';
+                this.classList.add('invalid');
+                this.classList.remove('valid');
+            } else {
+                passwordError.textContent = '';
+                this.classList.add('valid');
+                this.classList.remove('invalid');
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html>
+
+
+------
+
+carousel
+
+<html>
+<head>
+    <title>Image Carousel (Slider)</title>
+    <style>
+        #carousel {
+            position: relative;
+            width: 800px;
+            height: 600px;
+        }
+        #carousel img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        #carousel img.active {
+            display:block;
+        }
+        #next, #prev {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        #next {
+            right: 0;
+        }
+        #prev {
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="carousel">
+        <img src="image1.jpg" class="active">
+        <img src="image2.jpg">
+        <img src="image3.jpg">
+        <span id="next">&#10095;</span>
+        <span id="prev">&#10094;</span>
+    </div>
+
+    <script>
+        let currentImage = 0;
+        const images = document.querySelectorAll('#carousel img');
+        const nextButton = document.getElementById('next');
+        const prevButton = document.getElementById('prev');
+
+        nextButton.addEventListener('click', () => {
+            images[currentImage].classList.remove('active');
+            currentImage = (currentImage + 1) % images.length;
+            images[currentImage].classList.add('active');
+        });
+
+        prevButton.addEventListener('click', () => {
+            images[currentImage].classList.remove('active');
+            currentImage = (currentImage - 1 + images.length) % images.length;
+            images[currentImage].classList.add('active');
+        });
+
+        setInterval(() => {
+            images[currentImage].classList.remove('active');
+            currentImage = (currentImage + 1) % images.length;
+            images[currentImage].classList.add('active');
+        }, 3000);
+    </script>
+</body>
+</html>
+
+
+----------
+
+show hide password
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>show/hide password</title>
+</head>
+<body>
+  <h1>show/hide password</h1>
+  <label for="password">password:</label>
+  <input type="password" id="password" name="password"> 
+  <label for="showPassword">show password</label>
+  <input type="checkbox" id="showPassword">
+  <script>
+    const passwordField = document.getElementById('password');
+    const showPasswordCheckbox = document.getElementById('showPassword');
+    showPasswordCheckbox.addEventListener('change', function() {
+      if (showPasswordCheckbox.checked) {
+        passwordField.type = 'text';
+      } else {
+        passwordField.type = 'password'; 
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+----------
+
+digital clock
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+</head>
+<body style="font-family: Arial, sans-serif; text-align: center; padding: 50px;">
+
+    <h1 id="clock"></h1>
+    <button onclick="toggleFormat()">Toggle 12/24 Hour</button>
+
+    <script>
+        let is24HourFormat = true;
+
+        function updateClock() {
+            let now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            if (!is24HourFormat) {
+                hours = hours % 12 || 12;
+            }
+
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function toggleFormat() {
+            is24HourFormat = !is24HourFormat;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+
+</body>
+</html>
+
+
+---------
+
+key pressed
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detect Key Pressed</title>
+</head>
+<body>
+    <span id="key-pressed"></span>
+
+    <script>
+        const keyPressedSpan = document.getElementById('key-pressed');
+
+        document.addEventListener('keydown', (event) => {
+            keyPressedSpan.textContent = `You pressed: ${event.key}`;
+        });
+    </script>
+</body>
+</html>
+
+
+--------
+
+rock paper scissor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, Scissors Game</title>
+</head>
+<body>
+    <button id="rock-button">Rock</button>
+    <button id="paper-button">Paper</button>
+    <button id="scissors-button">Scissors</button>
+    <span id="result"></span>
+
+    <script>
+        const rockButton = document.getElementById('rock-button');
+        const paperButton = document.getElementById('paper-button');
+        const scissorsButton = document.getElementById('scissors-button');
+        const resultSpan = document.getElementById('result');
+
+        const choices = ['rock', 'paper', 'scissors'];
+
+        rockButton.addEventListener('click', () => {
+            playGame('rock');
+        });
+
+        paperButton.addEventListener('click', () => {
+            playGame('paper');
+        });
+
+        scissorsButton.addEventListener('click', () => {
+            playGame('scissors');
+        });
+
+        function playGame(userChoice) {
+            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+            let result;
+
+            if (userChoice === computerChoice) {
+                result = 'It\'s a tie!';
+            } else if ((userChoice === 'rock' && computerChoice === 'scissors') ||
+                       (userChoice === 'paper' && computerChoice === 'rock') ||
+                       (userChoice === 'scissors' && computerChoice === 'paper')) {
+                result = `You win! ${userChoice} beats ${computerChoice}`;
+            } else {
+                result = `You lose! ${computerChoice} beats ${userChoice}`;
+            }
+
+            resultSpan.textContent = result;
+        }
+    </script>
+</body>
+</html>
+
+
+---------
+
+timer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+</head>
+<body>
+    <input type="number" id="seconds" name="seconds">
+    <button id="start-button">Start</button>
+    <span id="countdown"></span>
+
+    <script>
+        const secondsInput = document.getElementById('seconds');
+        const startButton = document.getElementById('start-button');
+        const countdownSpan = document.getElementById('countdown');
+
+        startButton.addEventListener('click', () => {
+            let seconds = parseInt(secondsInput.value);
+            let intervalId;
+
+            function updateCountdown() {
+                if (seconds > 0) {
+                    countdownSpan.textContent = `Countdown: ${seconds}`;
+                    seconds--;
+                } else {
+                    countdownSpan.textContent = 'Countdown finished!';
+                    clearInterval(intervalId);
+                }
+            }
+
+            intervalId = setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+
+</html>
+
+
+---------
+
+font size
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Font Size Adjuster</title>
+</head>
+<body>
+    <p id="paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <button id="increase-font-size">Increase Font Size</button>
+    <button id="decrease-font-size">Decrease Font Size</button>
+
+    <script>
+        const paragraph = document.getElementById('paragraph');
+        const increaseFontSizeButton = document.getElementById('increase-font-size');
+        const decreaseFontSizeButton = document.getElementById('decrease-font-size');
+
+        let fontSize = 16;
+
+        increaseFontSizeButton.addEventListener('click', () => {
+            fontSize += 2;
+            paragraph.style.fontSize = `${fontSize}px`;
+        });
+
+        decreaseFontSizeButton.addEventListener('click', () => {
+            fontSize -= 2;
+            paragraph.style.fontSize = `${fontSize}px`;
+        });
+    </script>
+</body>
+</html>
+
+
+------
+
+Menu pizza shop
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <h1>Pizza Shop</h1>
+
+    <h3>Size: </h3>
+    <label><input type="radio" name="size" value = "small">Small</label>
+    <label><input type="radio" name="size" value = "medium">Medium</label>
+    <label><input type="radio" name="size" value = "large">Large</label>
+
+    <h3>Toppings: </h3>
+    <label><input type="checkbox" name = "toppings" value = "tomato">Tomato</label>
+    <label><input type="checkbox" name = "toppings" value = "olive">Olive</label>
+    <label><input type="checkbox" name = "toppings" value = "mushroom">Mushroom</label>
+
+    <button onclick="summary()">Get Order Summary</button>
+
+    <h1>
+        <p id="ans"></p>
+    </h1>
+    <script>
+        function summary(){
+            let size = document.querySelector('input[name="size"]:checked');
+            let toppings = document.querySelectorAll('input[name = "toppings"]:checked');
+            let sizeSum = size.value;
+            let str = `Order Summary: ${sizeSum}`;
+            toppings.forEach((topping)=>{
+                str+=`${topping.value}`;
+            });
+            let para = document.getElementById("ans");
+            para.innerHTML = str;
+        }
+    </script>
+</body>
+</html>
+
+another pizza :
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>q3</title>
+</head>
+<body>
+    <h1>Order your pizza</h1>
+    <h3>Select size</h3>
+    <label><input type="radio" name="size" value="Small"> Small</label><br>
+    <label><input type="radio" name="size" value="Medium"> Medium</label><br>
+    <label><input type="radio" name="size" value="Large"> Large</label><br>
+
+    <h3>Select Toppings:</h3>
+    <label><input type="checkbox" name="topping" value="Cheese"> Cheese</label><br>
+    <label><input type="checkbox" name="topping" value="Pepperoni"> Pepperoni</label><br>
+    <label><input type="checkbox" name="topping" value="Mushrooms"> Mushrooms</label><br>
+    <label><input type="checkbox" name="topping" value="Olives"> Olives</label><br>
+
+    <button onclick="submitOrder()">Submit Order</button>
+    <h3>Order Summary:</h3>
+    <p id="orderSummary"></p>
+    <script>
+        function submitOrder() {
+            let size = document.querySelector('input[name="size"]:checked');
+            let toppings = document.querySelectorAll('input[name="topping"]:checked');
+            let toppingsList = Array.from(toppings).map(topping => topping.value);
+            if (!size) {
+                document.getElementById("orderSummary").textContent = "Please select a pizza size.";
+                return;
+            }
+            let summary = `You ordered a ${size.value} pizza with `;
+            summary += toppingsList.length > 0 ? toppingsList.join(", ") : "no toppings.";
+            document.getElementById("orderSummary").textContent = summary;
+        }
+
+    </script>
+</body>
+</html>
+
+
+--------
+
+Mulitplication Table fieldset
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>q4</title>
+</head>
+<body>
+    <fieldset>
+        <legend>Multiplication Table</legend>
+        <label for="numberInput">Enter a number:</label>
+        <input type="number" id="numberInput">
+        <button onclick="generateTable()">Generate</button>
+    </fieldset>
+    
+    <h3>Result:</h3>
+    <table id="resultTable" border="1"></table>
+
+    <script>
+        function generateTable() {
+            let num = document.getElementById("numberInput").value;
+            let table = document.getElementById("resultTable");
+            table.innerHTML = "";
+            for (let i = 1; i <= 10; i++) {
+                let row = table.insertRow();
+                row.insertCell(0).textContent = `${num} × ${i}`;
+                row.insertCell(1).textContent = num * i;
+            }
+        }
+    </script>
+</body>
+</html>
+
+-----
+
+
+dark light mode
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>q5</title>
+</head>
+<body style="transition: 0.3s;">
+    <h2>Theme Switcher</h2>
+    <button onclick="setDarkMode()">Dark Mode</button>
+    <button onclick="setLightMode()">Light Mode</button>
+
+    <script>
+        function setDarkMode() {
+            document.body.style.backgroundColor = "#222";
+            document.body.style.color = "white";
+        }
+
+        function setLightMode() {
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
+    </script>
+</body>
+</html>
+
+--------
+
+z index gallery 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>q6</title>
+    <style>
+        #gallery {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+        #gallery img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            transition: transform 0.3s, z-index 0.3s;
+        }
+        #img1 { top: 0; left: 0; z-index: 1; }
+        #img2 { top: 40px; left: 40px; z-index: 2; }
+        #img3 { top: 80px; left: 80px; z-index: 3; }
+    </style>
+</head>
+<body>
+    <h2>Layered Image Gallery</h2>
+    <div id="gallery">
+        <img src="https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630" id="img1" style="z-index: 1;" onclick="bringToFront(this)">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg" id="img2" style="z-index: 2;" onclick="bringToFront(this)">
+        <img src="https://static.vecteezy.com/vite/assets/photo-masthead-375-BoK_p8LG.webp" id="img3" style="z-index: 3;" onclick="bringToFront(this)">
+    </div>
+
+    <script>
+    function bringToFront(img) {
+        let images = document.querySelectorAll("#gallery img");
+        let maxZ = 0;
+
+        for (let i = 0; i < images.length; i++) {
+            let zIndex = parseInt(images[i].style.zIndex) || 0;
+            if (zIndex > maxZ) {
+                maxZ = zIndex;
+            }
+        }
+
+        img.style.zIndex = maxZ + 1;
+    }
+
+    </script>
+</body>
+</html>
+
+
+---------
+
+Dynamic select
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>q8</title>
+</head>
+<body>
+    <h2>Country & State Selection</h2>
+
+    <label for="country">Select Country:</label>
+    <select id="country" onchange="updateStates()">
+        <option value="">-- Select Country --</option>
+        <option value="USA">USA</option>
+        <option value="India">India</option>
+        <option value="UK">UK</option>
+    </select>
+
+    <label for="state">Select State:</label>
+    <select id="state">
+        <option value="">-- Select State --</option>
+    </select>
+
+    <script>
+        const states = {
+            USA: ["California", "Texas", "New York"],
+            India: ["Maharashtra", "Karnataka", "Delhi"],
+            UK: ["England", "Scotland", "Wales"]
+        };
+
+        function updateStates() {
+            let country = document.getElementById("country").value;
+            let stateDropdown = document.getElementById("state");
+            stateDropdown.innerHTML = '<option value="">-- Select State --</option>';
+
+            if (country && states[country]) {
+                states[country].forEach(state => {
+                    let option = document.createElement("option");
+                    option.value = state;
+                    option.textContent = state;
+                    stateDropdown.appendChild(option);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+-----------
+
+canvas
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>q9</title>
+    <style>
+      canvas {
+        border: 2px solid black;
+        cursor: crosshair;
+      }
+      .controls {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Simple Drawing App</h2>
+    <div>
+      <label for="color">Color:</label>
+      <input type="color" id="color" value="#000000" />
+      <label for="size">Brush Size:</label>
+      <input type="number" id="size" value="5" min="1" max="50" />
+      <button onclick="clearCanvas()">Clear Canvas</button>
+    </div>
+    <canvas id="drawingCanvas" width="600" height="400"></canvas>
+
+    <script>
+      const canvas = document.getElementById("drawingCanvas");
+      const ctx = canvas.getContext("2d");
+      let isDrawing = false;
+
+      canvas.addEventListener("mousedown", () => (isDrawing = true));
+      canvas.addEventListener("mouseup", () => (isDrawing = false));
+      canvas.addEventListener("mousemove", draw);
+
+      function draw(event) {
+        if (!isDrawing) return;
+        ctx.lineWidth = document.getElementById("size").value;
+        ctx.strokeStyle = document.getElementById("color").value;
+        ctx.lineCap = "round";
+
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineTo(event.clientX - rect.left, event.clientY - rect.top);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(event.clientX - rect.left, event.clientY - rect.top);
+      }
+
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    </script>
+  </body>
+</html>
+
+
+-----------
+
+todo list
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>q10</title>
+</head>
+<body>
+    <h2>To-Do List</h2>
+    <input type="text" id="todoInput" placeholder="Enter a task">
+    <button id="addBtn">Add</button>
+    <ul id="todoList"></ul>
+    <script>
+        document.getElementById("addBtn").addEventListener("click", function() {
+            let input = document.getElementById("todoInput");
+            let task = input.value.trim();
+            if (task === "") return;
+            
+            let li = document.createElement("li");
+            li.textContent = task;
+
+            let removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.addEventListener("click", function() {
+                li.remove();
+            });
+
+            li.appendChild(removeBtn);
+            document.getElementById("todoList").appendChild(li);
+            input.value = "";
+        });
+    </script>
+</body>
+</html>

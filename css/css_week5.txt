@@ -1,0 +1,726 @@
+Grid 
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <link rel="stylesheet" href="q3_styles.css">
+</head>
+<body>
+  <h1>Image Gallery</h1>
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="https://cdn.pixabay.com/photo/2016/12/09/11/33/smartphone-1894723_1280.jpg" alt="Image 1">
+      <div class="caption">Caption 1</div>
+    </div>
+    <div class="gallery-item">
+        <img src="xyz.jpg">
+        <div class="caption">Caption 2</div>
+    </div>
+    <div class="gallery-item">
+        <img src="xyz.jpg">
+        <div class="caption">Caption 3</div>
+    </div>
+    <div class="gallery-item">
+        <img src="xyz.jpg">
+        <div class="caption">Caption 4</div>
+    </div>
+    <div class="gallery-item">
+        <img src="xyz.jpg">
+        <div class="caption">Caption 5</div>
+    </div>
+    <div class="gallery-item">
+        <img src="xyz.jpg">
+        <div class="caption">Caption 6</div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+css
+
+h1{
+    text-align: center;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .gallery-item {
+    position:relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border:2px solid rgb(183, 179, 179);
+    border-radius: 10px;
+  }
+
+  .gallery-item img {
+    width:100%;
+    height:auto;
+  }
+
+  .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      text-align: center;
+      padding: 5px;
+      opacity: 0;
+  }
+  .gallery-item:hover img{
+    transform:scale(1.1);
+  }
+  .gallery-item:hover .caption{
+      opacity: 1;
+  }
+
+
+--------------------------
+
+
+Dropdown menu
+
+html
+
+<nav class="navbar">
+  <ul class="nav-menu">
+    <li><a href="#">Home</a></li>
+    <li class="dropdown">
+      <a href="#">Services</a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Web Design</a></li>
+        <li><a href="#">SEO</a></li>
+        <li><a href="#">Hosting</a></li>
+      </ul>
+    </li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+
+css
+
+.navbar {
+  background: #333;
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  display: block;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-menu a:hover {
+  background: #444;
+}
+
+/* Dropdown menu - hidden by default */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #444;
+  list-style: none;
+  min-width: 160px;
+}
+
+.dropdown-menu li a {
+  padding: 10px 16px;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+-----------
+
+gradient
+
+css
+
+.btn-gradient {
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+}
+.btn-border:hover {
+  border: 2px solid red;
+}
+.btn-border {
+  padding: 10px 20px;
+  border: 2px solid black;
+}
+.btn-glow {
+  background: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 123, 255, 1);
+}
+
+
+
+------------
+
+
+Animation header
+
+css
+
+@keyframes colorChange {
+  0% {
+    color: blue;
+  }
+  50% {
+    color: rgb(188, 241, 13);
+  }
+  100% {
+    color: red;
+  }
+}
+.header {
+  animation-name: colorChange;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  transition: transform 0.3s ease;
+}
+.header:hover {
+  transform: translate(100px) scale(1.1);
+}
+
+-----
+
+sticky navigation bar
+
+html 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Section Page</title>
+  <link rel="stylesheet" href="q7_styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#section1" class="active">About</a>
+    <a href="#section2">Services</a>
+    <a href="#section3">Contact</a>
+  </nav>
+  <section id="section1" class="section">
+    <h2>About Us</h2>
+    <p>Information about the company.</p>
+  </section>
+  <section id="section2" class="section">
+    <h2>Our Services</h2>
+    <p>Details of services offered.</p>
+  </section>
+  <section id="section3" class="section">
+    <h2>Contact Us</h2>
+    <p>Contact information goes here.</p>
+  </section>
+</body>
+</html>
+
+
+css
+
+body {
+  margin:0;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar a:hover {
+  background-color: #575757;
+  color: #fff;
+}
+
+.navbar a.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: 2px solid white;
+}
+
+.section{
+  height:100vh;
+  padding-top:50px;
+}
+
+
+-----------
+
+Form style
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="q8_styles.css">
+</head>
+<body>
+    <form class="login-form" action="#" method="post">
+        <h2>Login</h2>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <div class="remember-me">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember Me</label>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+
+
+css
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.login-form input[type="email"]:valid,
+.login-form input[type="password"]:valid {
+    border-color: #4CAF50;
+}
+
+.login-form input[type="email"]:invalid,
+.login-form input[type="password"]:invalid {
+    border-color: #f44336; 
+}
+
+.login-form input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+
+----------
+
+Loading Screen
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Screen Example</title>
+    <link rel="stylesheet" href="q10_styles.css">
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="main-content">
+        <h1>Welcome to the Main Content!</h1>
+        <p>This is the content that appears after the loading screen.</p>
+    </div>
+</body>
+</html>
+
+
+
+css
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    overflow: hidden; 
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeOut 3s forwards; 
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db; 
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    99% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+
+--------
+
+theme toggle
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light/Dark Theme Toggle</title>
+  <link rel="stylesheet" href="q12_styles.css">
+</head>
+<body>
+  <input type="checkbox" id="theme-toggle">
+  <label for="theme-toggle" class="toggle-label">Toggle Theme</label>
+  <div class="content light">
+    <h1>Welcome to the Light/Dark Theme Page</h1>
+    <p>Click the button above to toggle the theme.</p>
+  </div>
+</body>
+</html>
+
+
+css
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.content {
+  transition: background-color 0.3s, color 0.3s;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+.dark {
+  background-color: #000000;
+  color: #ffffff;
+}
+#theme-toggle {
+  display: none;
+}
+.toggle-label {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+.toggle-label:hover {
+  background-color: #0056b3;
+}
+#theme-toggle:checked ~ .content {
+  background-color: #000000;
+  color: #ffffff;
+}
+#theme-toggle:checked ~ .toggle-label {
+  background-color: #343a40;
+  color: #ffffff;
+}
+
+
+-----------
+
+Flipping Card
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Rotating Card</title>
+  <link rel="stylesheet" href="q13_styles.css">
+</head>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-front">
+        <h2>Front</h2>
+        <p>This is the front of the card.</p>
+      </div>
+      <div class="card-back">
+        <h2>Back</h2>
+        <p>This is the back of the card.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+css
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 300px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(0);
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-front h2 ,
+.card-back h2 {
+  margin: 0; 
+}
+
+.card-front {
+  background: #007bff;
+  color: white;
+}
+
+.card-back {
+  background: #28a745;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+
+----
+
+Timeline
+
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Timeline</title>
+    <link rel="stylesheet" href="q14_styles.css">
+</head>
+<body>
+    <div class="timeline">
+        <div class="event event-1">
+            <div class="content">
+                <h3>Event 1</h3>
+                <p>Description of event 1.</p>
+            </div>
+        </div>
+        <div class="event event-2">
+            <div class="content">
+                <h3>Event 2</h3>
+                <p>Description of event 2.</p>
+            </div>
+        </div>
+        <div class="event event-3">
+            <div class="content">
+                <h3>Event 3</h3>
+                <p>Description of event 3.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+css
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 50px 0; }
+
+.timeline { position: relative; max-width: 800px; margin: 0 auto; }
+
+.event { position: relative; margin: 30px 0; padding-left: 40px; }
+
+.event::before {
+    content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%; background: #ddd;
+}
+
+.event::after {
+    content: ''; position: absolute; left: -10px; top: 15px; width: 20px; height: 20px;
+    border-radius: 50%; background: #3498db; border: 5px solid #fff;
+}
+
+.event-1::after { background: #3498db; }  
+.event-2::after { background: #2ecc71; } /* Green */
+.event-3::after { background: #f39c12; } /* Yellow */
+
+.content { padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+h3 { color: #2c3e50; }
+p { color: #7f8c8d; }
+
+
+----
+
+Gradient
+
+css
+
+body{
+  margin: 0;
+  padding: 0;
+}
+.header {
+  background: linear-gradient(45deg, #3494E6, #EC6EAD);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:100vh;
+}
+.header h1 {
+  font-size: 4rem;
+  background: linear-gradient(45deg,rgba(255,255,255,0.7), rgba(255,255,255,0.2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
